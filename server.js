@@ -23,7 +23,7 @@ const allowedOrigins = [
     "http://127.0.0.1:5500", 
     "https://comp4537api.ziqil.com", 
     "http://localhost:8003",
-    "https://comp4537.ziqil.com/",
+    "https://comp4537.ziqil.com",
 ];
 
 // CORS configuration
