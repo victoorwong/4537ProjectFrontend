@@ -21,7 +21,8 @@ app.use(cookieParser());
 
 const allowedOrigins = [
     "http://localhost:8003/", // Local frontend
-    "https://comp4537api.ziqil.com/", // Hosted frontend
+    "https://comp4537api.ziqil.com/",
+    "http://127.0.0.1:5500/" // Hosted frontend
 ];
 
 app.use(
