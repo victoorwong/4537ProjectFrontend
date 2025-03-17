@@ -5,7 +5,6 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const path = require("path");
 
-
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const summaryRoutes = require("./routes/summaryRoutes");
@@ -19,16 +18,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins = [
-    "http://localhost:8003/", // Local frontend
-    "https://comp4537api.ziqil.com/",
-    "http://127.0.0.1:5500/" // Hosted frontend
-];
-
+// Allow all origins
 app.use(
     cors({
-        origin: allowedOrigins,
-        credentials: true,
+        origin: "*", // Allow all origins
+        credentials: true, // Allow cookies and credentials (optional)
     })
 );
 
