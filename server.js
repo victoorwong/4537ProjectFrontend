@@ -18,11 +18,12 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// Define allowed origins (Frontend URLs)
+
 const allowedOrigins = [
-    "http://127.0.0.1:5500", // Local frontend (for development)
-    "https://comp4537api.ziqil.com", // Hosted frontend (your production URL)
-    "http://localhost:8003", // Another local frontend (if applicable)
+    "http://127.0.0.1:5500", 
+    "https://comp4537api.ziqil.com", 
+    "http://localhost:8003",
+    "https://comp4537.ziqil.com/",
 ];
 
 // CORS configuration
@@ -41,10 +42,9 @@ app.use(
     })
 );
 
-// Handling preflight requests (OPTIONS)
 app.options("*", cors());
 
-// Static files
+
 app.use("/", express.static("public"));
 
 // API Routes
