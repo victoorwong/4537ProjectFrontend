@@ -18,13 +18,22 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// Allow all origins
-app.use(
-    cors({
-        origin: "*", // Allow all origins
-        credentials: true, // Allow cookies and credentials (optional)
-    })
-);
+const allowedOrigins = [
+    "http://localhost:3000/",  // Local frontend development
+    "http://127.0.0.1:5500/",  // Your local frontend testing
+    "https://comp4537api.ziqil.com/",  // Hosted frontend
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,  // Allow credentials (cookies, authorization headers)
+  }));
 
 app.use("/", express.static("public"));
 
