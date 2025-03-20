@@ -20,10 +20,11 @@ app.use(cookieParser());
 
 
 const allowedOrigins = [
-    "http://127.0.0.1:5500", 
-    "https://comp4537api.ziqil.com", 
+    "http://127.0.0.1:5500",
+    "https://comp4537api.ziqil.com",
     "http://localhost:8003",
     "https://comp4537.ziqil.com",
+    "https://victoorwong.github.io",
 ];
 
 // CORS configuration
