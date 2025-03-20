@@ -39,7 +39,7 @@ app.use(
         },
         credentials: true, // Allow cookies and credentials to be sent
         methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these methods for cross-origin requests
-        allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers in the request
+        allowedHeaders: ['Content-Type', 'Authorization', "Cookie"], // Allow these headers in the request
     })
 );
 
