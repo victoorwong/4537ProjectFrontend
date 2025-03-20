@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Project</title>
+  </head>
+  <body>
+    <h1>User Landing Page</h1>
+    <p id="displayName"></p>
+    <p id="userType"></p>
+
+    <button id="adminOnly" style="display: none">Admin Dashboard</button>
+
+    <script src="js/protect.js"></script>
+    <script>
+      checkAccess(false);
+    </script>
+
+    <button id="logOut">Log Out</button>
+    <button id="summary">Get Game Summary</button>
+
+    <script src="js/user.js"></script>
+  </body>
+</html>
