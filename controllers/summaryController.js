@@ -16,7 +16,7 @@ exports.generateGameSummary = async (req, res) => {
 
         // Get user and increment API call count
         const user = await User.findById(req.user.userId);
-        user.apiCalls += 1;
+        user.apiCallsRemaining -= 1;
         await user.save();
 
         // Create a prompt for text generation
