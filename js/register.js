@@ -8,7 +8,7 @@ document
 
     try {
       const response = await fetch(
-        "https://urchin-app-ery5g.ondigitalocean.app/api/auth/register",
+        "https://goldfish-app-cqju6.ondigitalocean.app/api/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

@@ -6,7 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
   try {
     const response = await fetch(
-      "https://urchin-app-ery5g.ondigitalocean.app/api/auth/login",
+      "https://goldfish-app-cqju6.ondigitalocean.app/api/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -25,7 +25,7 @@ document.getElementById("logOut").addEventListener("click", async () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("isAdmin");
 
-    await fetch("https://urchin-app-ery5g.ondigitalocean.app/api/auth/logout", {
+    await fetch("https://goldfish-app-cqju6.ondigitalocean.app/api/auth/logout", {
       method: "POST",
       credentials: "include",
     });
