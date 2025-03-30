@@ -7,6 +7,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   try {
     const response = await fetch(
       "https://goldfish-app-cqju6.ondigitalocean.app/api/auth/login",
+      // "http://localhost:8003/api/auth/login",
+
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -15,6 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     );
 
     const data = await response.json();
+    console.log("Token received from backend:", data.token);
 
     if (response.ok) {
       alert("Login successful!");

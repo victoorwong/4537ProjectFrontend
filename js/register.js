@@ -9,6 +9,7 @@ document
     try {
       const response = await fetch(
         "https://goldfish-app-cqju6.ondigitalocean.app/api/auth/register",
+        // "http://localhost:8003/api/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

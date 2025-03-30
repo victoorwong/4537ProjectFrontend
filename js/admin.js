@@ -18,6 +18,7 @@ async function displayUserDashboard() {
 
     const response = await fetch(
       "https://goldfish-app-cqju6.ondigitalocean.app/api/users/profile",
+      // "http://localhost:8003/api/users/profile",
       {
         method: "GET",
         headers: {
@@ -47,6 +48,7 @@ async function displayUserDashboard() {
           <tbody>
       `;
 
+      // add total requests based on get/post
       result.userData.forEach((user) => {
         const totalRequests =
           (user.getRequests || 0) + (user.postRequests || 0);
@@ -110,4 +112,10 @@ displayUserDashboard();
 
 document.getElementById("toUserPage").addEventListener("click", () => {
   window.location.href = "user.html";
+});
+
+document.getElementById("logOut").addEventListener("click", () => {
+  localStorage.removeItem("authToken");
+  localStorage.removeItem("isAdmin");
+  window.location.href = "login.html";
 });
