@@ -259,7 +259,7 @@ async function loadUserSummaries() {
             <br />
             ${summary.summary}
             <br />
-            <button onclick="deleteSummary('${summary._id}')">🗑 Delete</button>
+            <button onclick="deleteSummary('${summary._id}')">Delete</button>
             <hr />
           `;
           summaryListEl.appendChild(li);
