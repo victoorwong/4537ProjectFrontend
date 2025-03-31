@@ -1,3 +1,5 @@
+import { messages } from "../messages.js";
+
 document
   .getElementById("registerForm")
   .addEventListener("submit", async (e) => {
@@ -9,7 +11,6 @@ document
     try {
       const response = await fetch(
         "https://goldfish-app-cqju6.ondigitalocean.app/api/auth/register",
-        // "http://localhost:8003/api/auth/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -18,14 +19,15 @@ document
       );
 
       const data = await response.json();
+
       if (response.ok) {
-        alert("Registration successful! Please log in.");
+        alert(messages.registrationSuccess);
         window.location.href = "login.html";
       } else {
         alert(data.message);
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("An error occurred. Please try again.");
+      alert(messages.registrationError);
     }
   });

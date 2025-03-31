@@ -1,3 +1,5 @@
+import { messages } from "../messages.js";
+
 async function displayUserDashboard() {
   const token = localStorage.getItem("authToken");
 
@@ -6,7 +8,7 @@ async function displayUserDashboard() {
   const tableContainer = document.getElementById("userTable");
 
   if (!token) {
-    displayNameEl.innerText = "Not logged in";
+    displayNameEl.innerText = messages.notLoggedIn;
     tableContainer.innerText = "";
     endPointsContainer.innerText = "";
     return;
@@ -14,11 +16,10 @@ async function displayUserDashboard() {
 
   try {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
-    displayNameEl.innerText = `Welcome, ${decodedToken.email}`;
+    displayNameEl.innerText = messages.welcome(decodedToken.email);
 
     const response = await fetch(
       "https://goldfish-app-cqju6.ondigitalocean.app/api/users/profile",
-      // "http://localhost:8003/api/users/profile",
       {
         method: "GET",
         headers: {
@@ -28,14 +29,12 @@ async function displayUserDashboard() {
     );
 
     if (!response.ok) {
-      throw new Error("Failed to fetch user profile");
+      throw new Error(messages.fetchProfileError);
     }
 
     const result = await response.json();
 
-    // If admin, render both tables
     if (result.isAdmin && Array.isArray(result.userData)) {
-      // ========== User Table ==========
       let userTableHTML = `
         <table border="1">
           <thead>
@@ -47,7 +46,6 @@ async function displayUserDashboard() {
           <tbody>
       `;
 
-      // add total requests based on get/post
       result.userData.forEach((user) => {
         const totalRequests =
           (user.getRequests || 0) + (user.postRequests || 0);
@@ -62,7 +60,6 @@ async function displayUserDashboard() {
       userTableHTML += `</tbody></table>`;
       tableContainer.innerHTML = userTableHTML;
 
-      // ========== Endpoint Stats Table ==========
       if (Array.isArray(result.endpointStats)) {
         let endpointHTML = `
           <table border="1">
@@ -89,19 +86,18 @@ async function displayUserDashboard() {
         endpointHTML += `</tbody></table>`;
         endPointsContainer.innerHTML = endpointHTML;
       } else {
-        endPointsContainer.innerHTML = "<p>No endpoint stats found.</p>";
+        endPointsContainer.innerHTML = `<p>${messages.noEndpointStats}</p>`;
       }
     } else {
-      // Regular user view
       tableContainer.innerHTML = `
-        <p>Your Data: ${JSON.stringify(result.userData)}</p>
+        <p>${messages.userDataLabel(JSON.stringify(result.userData))}</p>
       `;
       endPointsContainer.innerHTML = "";
     }
   } catch (error) {
-    console.error("Error displaying dashboard:", error);
-    tableContainer.innerText = "Failed to load data.";
-    endPointsContainer.innerText = "Failed to load endpoint stats.";
+    console.error(error);
+    tableContainer.innerText = messages.loadDataError;
+    endPointsContainer.innerText = messages.endpointStatsError;
   }
 }
 

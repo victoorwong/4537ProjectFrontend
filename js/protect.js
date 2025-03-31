@@ -14,7 +14,7 @@ function checkAccess(isAdminPage = false) {
     }
   } catch (error) {
     console.error("Token verification error:", error);
-    localStorage.removeItem("authToken"); // Remove invalid token
-    window.location.href = "login.html"; // Redirect to login
+    localStorage.removeItem("authToken");
+    window.location.href = "login.html";
   }
 }
