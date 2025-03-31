@@ -4,6 +4,7 @@ class UserDashboard {
     this.adminButton = document.getElementById("adminOnly");
     this.logoutButton = document.getElementById("logOut");
     this.summaryButton = document.getElementById("summary");
+    this.nhlSummaryButton = document.getElementById("nhlSummary"); 
 
     this.init();
   }
@@ -12,6 +13,7 @@ class UserDashboard {
     this.displayUserEmail();
     this.setupLogout();
     this.setupGetSummary();
+    this.setupNhlSummary();
   }
 
   displayUserEmail() {
@@ -45,6 +47,13 @@ class UserDashboard {
       window.location.href = "summary.html";
     });
   }
+
+  setupNhlSummary() {
+    this.nhlSummaryButton.addEventListener("click", () => {
+      window.location.href = "nhl-summary.html";
+    });
+  }
+
 
   setupLogout() {
     this.logoutButton.addEventListener("click", () => {

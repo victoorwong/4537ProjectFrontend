@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NHL Game Summaries</title>
+    <link rel="stylesheet" href="css/nhl-summary.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>NHL Game Summaries</h1>
+      
+      <div class="user-info">
+        <div>
+          <p id="displayName">Welcome</p>
+          <p>API Calls Remaining: <span id="apiCalls">0</span></p>
+        </div>
+        <div class="nav-buttons">
+          <button id="dashboardBtn">Dashboard</button>
+          <button id="logoutBtn">Logout</button>
+        </div>
+      </div>
+      
+      <h2>Recent NHL Games</h2>
+      <p>Select a game to generate a summary:</p>
+      
+      <div id="games-container">
+        <div class="loading">Loading recent NHL games...</div>
+        <div class="game-list" id="game-list"></div>
+      </div>
+      
+      <div id="selected-game" class="hidden">
+        <h3>Selected Game</h3>
+        <div id="game-details"></div>
+        <button id="generate-btn">Generate Summary</button>
+      </div>
+      
+      <div id="summary-container" class="summary-container hidden">
+        <h3>Generated Summary</h3>
+        <div id="summary-content"></div>
+        <div id="api-warning" class="api-warning hidden">
+          You have used all your free API calls.
+        </div>
+      </div>
+    </div>
+
+    <script src="js/protect.js"></script>
+    <script>
+      checkAccess(false);
+    </script>
+    <script src="js/nhl-summary.js"></script>
+  </body>
+</html>
