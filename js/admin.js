@@ -41,7 +41,6 @@ async function displayUserDashboard() {
           <thead>
             <tr>
               <th>Email</th>
-              <th>API Usages Left</th>
               <th>Total Requests (GET + POST)</th>
             </tr>
           </thead>
@@ -55,7 +54,6 @@ async function displayUserDashboard() {
         userTableHTML += `
           <tr>
             <td>${user.email}</td>
-            <td>${user.apiCallsRemaining}</td>
             <td>${totalRequests}</td>
           </tr>
         `;
@@ -96,7 +94,6 @@ async function displayUserDashboard() {
     } else {
       // Regular user view
       tableContainer.innerHTML = `
-        <p>Your API calls remaining: ${result.apiCallsRemaining}</p>
         <p>Your Data: ${JSON.stringify(result.userData)}</p>
       `;
       endPointsContainer.innerHTML = "";
