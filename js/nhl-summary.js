@@ -12,10 +12,15 @@ const generateBtn = document.getElementById('generate-btn');
 const summaryContainerEl = document.getElementById('summary-container');
 const summaryContentEl = document.getElementById('summary-content');
 const apiWarningEl = document.getElementById('api-warning');
+const userSummariesEl = document.getElementById('user-summaries');
+const summaryListEl = document.getElementById('summary-list');
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   await getUserProfile();
   await loadRecentGames();
+  await loadUserSummaries();
+
   
   document.getElementById('dashboardBtn').addEventListener('click', () => {
     window.location.href = 'user.html';
@@ -229,3 +234,71 @@ async function generateSummary() {
     generateBtn.textContent = 'Generate Summary';
   }
 }
+
+async function loadUserSummaries() {
+    const token = localStorage.getItem('authToken');
+  
+    try {
+      const response = await fetch(`${API_URL}/summary`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      const result = await response.json();
+  
+      if (result.success && result.data.length > 0) {
+        summaryListEl.innerHTML = '';
+        result.data.forEach(summary => {
+          const li = document.createElement('li');
+          const date = new Date(summary.gameDetails.date).toLocaleDateString();
+  
+          li.innerHTML = `
+            <strong>${summary.gameDetails.homeTeam} vs ${summary.gameDetails.awayTeam}</strong> 
+            (${summary.gameDetails.homeScore}-${summary.gameDetails.awayScore}) on ${date}
+            <br />
+            ${summary.summary}
+            <br />
+            <button onclick="deleteSummary('${summary._id}')">🗑 Delete</button>
+            <hr />
+          `;
+          summaryListEl.appendChild(li);
+        });
+  
+        userSummariesEl.classList.remove('hidden');
+      } else {
+        summaryListEl.innerHTML = '<li>No summaries yet.</li>';
+        userSummariesEl.classList.remove('hidden');
+      }
+    } catch (error) {
+      console.error('Error loading user summaries:', error);
+    }
+  }
+  
+  async function deleteSummary(summaryId) {
+    const token = localStorage.getItem('authToken');
+  
+    if (!confirm('Are you sure you want to delete this summary?')) return;
+  
+    try {
+      const response = await fetch(`${API_URL}/summary/${summaryId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        alert('Summary deleted successfully');
+        await loadUserSummaries();
+      } else {
+        alert(result.message || 'Failed to delete summary');
+      }
+    } catch (error) {
+      console.error('Error deleting summary:', error);
+      alert('An error occurred while deleting the summary');
+    }
+  }
+  
