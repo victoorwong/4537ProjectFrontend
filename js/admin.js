@@ -20,6 +20,7 @@ async function displayUserDashboard() {
 
     const response = await fetch(
       "https://goldfish-app-cqju6.ondigitalocean.app/api/users/profile",
+      // "http://localhost:8003/api/users/profile",
       {
         method: "GET",
         headers: {
@@ -41,6 +42,7 @@ async function displayUserDashboard() {
             <tr>
               <th>Email</th>
               <th>Total Requests (GET + POST)</th>
+              <th>API Calls Remaining</th>
             </tr>
           </thead>
           <tbody>
@@ -49,10 +51,14 @@ async function displayUserDashboard() {
       result.userData.forEach((user) => {
         const totalRequests =
           (user.getRequests || 0) + (user.postRequests || 0);
+        const apiCallsRemaining =
+          user.apiUsage?.apiCallsRemaining ?? user.apiCallsRemaining ?? 0;
+
         userTableHTML += `
           <tr>
             <td>${user.email}</td>
             <td>${totalRequests}</td>
+            <td>${apiCallsRemaining}</td>
           </tr>
         `;
       });
