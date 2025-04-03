@@ -58,7 +58,7 @@ async function getUserProfile() {
     }
 
     const data = await response.json();
-    apiCallsEl.textContent = data.apiCallsRemaining;
+    apiCallsEl.textContent = data.apiUsage?.apiCallsRemaining ?? data.apiCallsRemaining ?? 0;
 
     if (data.apiCallsRemaining <= 0) {
       apiWarningEl.classList.remove("hidden");
