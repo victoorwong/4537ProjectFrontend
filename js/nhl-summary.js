@@ -45,7 +45,7 @@ async function getUserProfile() {
 
   try {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
-    displayNameEl.innerText = messages.welcome(decodedToken.email);
+    displayNameEl.innerText = `Welcome, ${decodedToken.email}`;
 
     const response = await fetch(`${API_URL}/users/profile`, {
       headers: {
@@ -54,13 +54,16 @@ async function getUserProfile() {
     });
 
     if (!response.ok) {
-      throw new Error(messages.fetchProfileError);
+      throw new Error("Failed to fetch user profile");
     }
 
     const data = await response.json();
-    apiCallsEl.textContent = data.apiUsage?.apiCallsRemaining ?? data.apiCallsRemaining ?? 0;
+    const apiCallsRemaining =
+      data.apiUsage?.apiCallsRemaining ?? data.apiCallsRemaining ?? 0;
 
-    if (data.apiCallsRemaining <= 0) {
+    apiCallsEl.textContent = apiCallsRemaining;
+
+    if (apiCallsRemaining <= 0) {
       apiWarningEl.classList.remove("hidden");
     }
   } catch (error) {
